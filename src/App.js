@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: 'John',
+      userProducts: ['Milk', 'Tomato', 'Water']
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Home</h1>
+        <p>Hello {this.state.userName}, welcome.</p>
+        <ProductList products={this.state.userProducts} />
+      </div>
+    );
+  }
 }
+
+class ProductList extends React.Component {
+  render() {
+    return (
+      <div>
+        {this.props.products.length === 0 && <p>There are no products on the list.</p>}
+        {this.props.products.map(item => <ProductItem product={item} key={item} />)}
+      </div>
+    );
+  }
+}
+
+
+class ProductItem extends React.Component {
+  render() {
+    return (
+      <div className="product">{this.props.product}</div>
+    );
+  }
+}
+
 
 export default App;
